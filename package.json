@@ -16,7 +16,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "bun build src/index.ts --outdir ./dist --target bun",
+    "build": "bun build src/index.ts --outdir ./dist --target node",
     "prepublishOnly": "bun run build",
     "test": "bun run src/index.ts"
   },

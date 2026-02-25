@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { cancel, intro, isCancel, outro, text } from "@clack/prompts";
 import { execa } from "execa";
 import { downloadTemplate } from "giget";
