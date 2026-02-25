@@ -1,0 +1,36 @@
+{
+  "name": "create-nuxt-launchpad",
+  "version": "0.0.1",
+  "description": "CLI for creating Nuxt Launchpad projects",
+  "author": {
+    "name": "Bulat",
+    "email": "KhatmullinBR@yandex.ru"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "create-nuxt-launchpad": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "bun build src/index.ts --outdir ./dist --target bun",
+    "prepublishOnly": "bun run build",
+    "test": "bun run src/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^25.3.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.0.1",
+    "execa": "^9.6.1",
+    "giget": "^3.1.2",
+    "kolorist": "^1.8.0"
+  }
+}
