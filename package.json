@@ -6,6 +6,16 @@
     "name": "Bulat",
     "email": "KhatmullinBR@yandex.ru"
   },
+  "keywords": [
+    "nuxt",
+    "cli",
+    "fsd",
+    "frontend",
+    "template",
+    "starter",
+    "boilerplate",
+    "web"
+  ],
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
