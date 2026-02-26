@@ -105,7 +105,7 @@ const { data: tickets, pending } = ticketsApi.getAll({
 
 Contributions are welcome! Here's how you can help:
 
-1. **Fork** the repository
+1. **Fork** the repository [Github](https://github.com/KhatmullinBulat/nuxt-launchpad)
 2. **Create a branch** (`git checkout -b feat/your-feature`)
 3. **Make changes** and commit (`git commit -m 'feat: description'`)
 4. **Push** to your branch (`git push origin feat/your-feature`)
