@@ -10,7 +10,7 @@
   "type": "module",
   "main": "./dist/index.js",
   "bin": {
-    "create-nuxt-launchpad": "./dist/index.js"
+    "create-nuxt-launchpad": "dist/index.js"
   },
   "files": [
     "dist"
