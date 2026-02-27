@@ -1,6 +1,6 @@
 {
   "name": "create-nuxt-launchpad",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "CLI for creating Nuxt Launchpad projects",
   "author": {
     "name": "Bulat",
