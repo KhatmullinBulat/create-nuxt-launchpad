@@ -95,7 +95,7 @@ const { data: tickets, pending } = ticketsApi.getAll({
 
 ---
 
-### Coming Soon (v0.1.0)
+### Coming Soon (v0.1.5)
 - [ ] Choose package manager (npm, yarn, pnpm, bun)
 - [ ] Optional features (Tailwind, Pinia, Auth)
 
