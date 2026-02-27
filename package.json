@@ -6,6 +6,10 @@
     "name": "Bulat",
     "email": "KhatmullinBR@yandex.ru"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KhatmullinBulat/create-nuxt-launchpad.git"
+  },
   "keywords": [
     "nuxt",
     "cli",
