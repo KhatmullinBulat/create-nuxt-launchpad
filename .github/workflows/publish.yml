@@ -29,5 +29,3 @@ jobs:
       - run: bun run build
 
       - run: npm publish --access public --provenance
-
-      - run: npm publish --access public --provenance
