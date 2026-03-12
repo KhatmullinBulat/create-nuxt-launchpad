@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { cancel, intro, isCancel, log, multiselect, outro, spinner, text } from "@clack/prompts";
+import { cancel, intro, isCancel, log, multiselect, outro, select, spinner, text } from "@clack/prompts";
 import { execa } from "execa";
 import { downloadTemplate } from "giget";
 import { blue, green, yellow } from "kolorist";
@@ -20,6 +20,23 @@ const AVAILABLE_TEMPLATES = [
 ]
 
 type TemplateName = typeof AVAILABLE_TEMPLATES[number]['value']
+
+const PACKAGE_MANAGERS = [
+    {
+        value: 'bun', installCmd: 'bun install', devCmd: 'bun run dev'
+    },
+    {
+        value: 'pnpm', installCmd: 'pnpm install', devCmd: 'pnpm dev'
+    },
+    {
+        value: 'npm', installCmd: 'npm install', devCmd: 'npm run dev'
+    },
+    {
+        value: 'yarn', installCmd: 'yarn install', devCmd: 'yarn dev'
+    }
+]
+
+type PackageManager = typeof PACKAGE_MANAGERS[number]['value']
 
 async function main() {
     intro(`${green('🚀')} ${blue("Nuxt Launchpad Setup")}`)
@@ -47,6 +64,25 @@ async function main() {
         cancel("Operation canceled.")
         process.exit(0)
     }
+
+    const detectedPM = detectRunningPackageManager()
+
+    const packageManager = await select(
+        {
+            message: "Choose package manager:",
+            options: PACKAGE_MANAGERS.map(pm => ({
+                value: pm.value,
+            })),
+            initialValue: detectedPM
+        }
+    )
+
+    if (isCancel(packageManager)) {
+        cancel("Operation canceled.")
+        process.exit(0)
+    }
+
+    const pmConfig = PACKAGE_MANAGERS.find(pm => pm.value === packageManager)!
 
     const s = spinner()
 
@@ -80,10 +116,13 @@ async function main() {
         rmSync(templatesDir, { recursive: true, force: true })
     }
 
-    s.start(`${green('📦')} Installing dependencies...`)
+    s.start(`${green('📦')} Installing dependencies with ${blue(pmConfig.value)}...`)
     try {
-        // bun по умолчанию
-        await execa("bun", ["install"], {
+        const [pm, ...args] = pmConfig.installCmd.split(' ')
+
+        if (!pm) return
+
+        await execa(pm, args, {
             cwd: targetDir,
             stdio: "inherit"
         })
@@ -96,8 +135,24 @@ async function main() {
     outro(
         `${green('✅')} Done! Now run:\n\n` +
         `${blue(`cd ${projectName}`)}\n` +
-        `${blue("bun run dev")}\n`
+        `${blue(pmConfig.devCmd)}\n`
     )
+}
+
+function detectRunningPackageManager(): PackageManager {
+    const userAgent = process.env.npm_config_user_agent
+
+    if (!userAgent) {
+        if (process.versions.bun) return 'bun'
+        return 'npm'
+    }
+
+    if (userAgent.startsWith('bun')) return 'bun'
+    if (userAgent.startsWith('pnpm')) return 'pnpm'
+    if (userAgent.startsWith('yarn')) return 'yarn'
+    if (userAgent.startsWith('npm')) return 'npm'
+
+    return 'npm'
 }
 
 async function applyTemplate(projectDir: string, templateName: TemplateName) {
