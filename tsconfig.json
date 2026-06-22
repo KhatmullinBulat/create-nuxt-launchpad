@@ -4,13 +4,15 @@
     "lib": [
       "ESNext"
     ],
+    "types": [
+      "node"
+    ],
     "target": "ESNext",
-    "module": "ESNext",
+    "module": "nodenext",
     "moduleDetection": "force",
     "allowJs": true,
     // Bundler mode
-    "moduleResolution": "Node",
-    "allowImportingTsExtensions": true,
+    "moduleResolution": "nodenext",
     "verbatimModuleSyntax": true,
     "noEmit": true,
     // Best practices
